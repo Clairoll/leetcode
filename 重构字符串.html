@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 给定一个字符串S，检查是否能重新排布其中的字母，使得两相邻的字符不同。
+        // 若可行，输出任意可行的结果。若不可行，返回空字符串。
+        // 示例 1:
+        // 输入: S = "aab"
+        // 输出: "aba"
+        // 示例 2:
+        // 输入: S = "aaab"
+        // 输出: ""
+        // 注意:
+        // S 只包含小写字母并且长度在[1, 500]区间内。
+        /**
+         * @param {string} S
+         * @return {string}
+         */
+        // var reorganizeString = function (S) {
+        //     // 第一步：遍历每个字符记录其出现的次数
+        //     let map = {}
+        //     let max = 0
+        //     let maxChar = ''
+        //     let mapArr = []
+        //     let result = []
+        //     for (let i = 0; i < S.length; i++) {
+        //         let num = map[S[i]]
+        //         if (num) {
+        //             map[S[i]] = num + 1
+        //             if (map[S[i]] >= S.length / 2 + 1) {
+        //                 return ""
+        //             }
+        //         } else {
+        //             map[S[i]] = 1
+        //         }
+
+        //     }
+
+        //     // 找出出现次数最多的字符
+        //     for (let item in map) {
+        //         mapArr.push([item, map[item]])
+        //         if (map[item] > max) {
+        //             max = map[item]
+        //             maxChar = item
+        //         }
+        //     }
+        //     // 过滤掉次数最多的字符
+        //     mapArr = mapArr.filter(item => item[0] != maxChar)
+        //     let i = 0
+        //     while (i < S.length) {
+        //         if(max>0) {
+        //             result.push(maxChar)
+        //             max--
+        //         }
+        //         if (mapArr[i] && mapArr[i][1]> 0) {
+        //             result.push(mapArr[i][0])
+        //             mapArr[i][1]--
+        //         } else {
+        //             i++
+        //         }
+
+        //     }
+        //     return result.join('')
+
+        // };
+
+        var reorganizeString = function (S) {
+            const strMap = new Map()
+            let res = []
+            let flag = ''
+            let length = S.length
+            let strList = []
+            let newList = [] //数组去重
+            for (let i of S) {
+                strList.push(i) //遍历字符串存储到数组
+                strMap.has(i) ? strMap.set(i, strMap.get(i) + 1) : strMap.set(i, 1) //map存储字符出现次数
+
+                if (strMap.get(i) > Math.ceil(S.length / 2)) {
+                    return ''  //判断是否单个元素数量过多
+                }
+            }
+            newList = [...new Set(strList)]//数组去重
+            while (length--) {
+                let index = 0 // 目前还剩最多的字符的数量
+                for (let i of newList) {
+                    if (flag !== i) {
+                        index = Math.max(index, strMap.get(i))
+                    }
+                }
+                for (let i of newList) {
+                    // flag将相同字符排除（标记）
+                    if (strMap.get(i) === index && i !== flag) {
+                        strMap.set(i, index - 1)
+                        res.push(i)
+                        flag = i
+                        break
+                    }
+                }
+            }
+            return res.join('')
+        }
+
+        let data = reorganizeString("vvlov")
+        console.log(data)
+
+        // let data1 = reorganizeString('aaab')
+        // console.log(data1)
+    </script>
+</body>
+
+</html>

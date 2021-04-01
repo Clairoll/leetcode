@@ -1,0 +1,43 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-01-21 10:29:57
+ * @LastEditTime: 2021-01-21 10:37:47
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //         给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。
+
+        // 示例 :
+
+        // 输入: [1,2,1,3,2,5]
+        // 输出: [3,5]
+        /**
+         * @param {number[]} nums
+         * @return {number[]}
+         */
+        var singleNumber = function (nums) {
+            let res =[]
+            for(let i=0; i< nums.length; i++) {
+                if(nums.indexOf(nums[i]) == nums.lastIndexOf(nums[i])) {
+                    res.push(nums[i])
+                }
+            }
+            return res
+        };
+
+        console.log(singleNumber([1, 2, 1, 3, 2, 5]))
+    </script>
+</body>
+
+</html>

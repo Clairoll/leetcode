@@ -1,0 +1,65 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-03-17 11:24:37
+ * @LastEditTime: 2021-03-18 15:59:28
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //     给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
+
+    // 说明：解集不能包含重复的子集。
+
+    // 示例:
+
+    // 输入: [1,2,2]
+    // 输出:
+    // [
+    //   [2],
+    //   [1],
+    //   [1,2,2],
+    //   [2,2],
+    //   [1,2],
+    //   []
+    // ]
+    /**
+     * @param {number[]} nums
+     * @return {number[][]}
+     */
+    var subsetsWithDup = function (nums) {
+      nums.sort((a, b) => a - b)
+      let res = [[]]
+      let left = 0, r_l = 0;
+      for (let i = 0; i < nums.length; i++) {
+        if (i != 0 && nums[i] == nums[i - 1]) { // 该元素和前一个元素重复
+          left = res.length - r_l // 记录刚开始位置
+        } else {
+          left = 0
+        }
+        let len = res.length
+        r_l = len - left // 记录元素长度
+        for (let j = left; j < len; ++j) {
+          let tmp = [...res[j]]
+          tmp.push(nums[i])
+          res.push(tmp)
+        }
+      }
+      return res
+    };
+
+    console.log(subsetsWithDup([2, 1, 2]))
+  </script>
+</body>
+
+</html>

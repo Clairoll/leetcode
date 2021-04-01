@@ -1,0 +1,72 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-03-29 16:53:48
+ * @LastEditTime: 2021-03-30 10:05:39
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //     给你一个二叉树，请你返回其按 层序遍历 得到的节点值。 （即逐层地，从左到右访问所有节点）。
+
+    //  
+
+    // 示例：
+    // 二叉树：[3,9,20,null,null,15,7],
+
+    //     3
+    //    / \
+    //   9  20
+    //     /  \
+    //    15   7
+    // 返回其层序遍历结果：
+
+    // [
+    //   [3],
+    //   [9,20],
+    //   [15,7]
+    // ]
+
+
+    function TreeNode(val, left, right) {
+      this.val = (val === undefined ? 0 : val)
+      this.left = (left === undefined ? null : left)
+      this.right = (right === undefined ? null : right)
+    }
+
+    /**
+        * @param {TreeNode} root
+        * @return {number[][]}
+        */
+    var levelOrder = function (root) {
+      if (!root) return []
+      let res = []
+      let data = [root]
+      while (data.length > 0) {
+        let arr = []
+        let len = data.length
+        while (len--) {
+          let node = data.shift()
+          arr.push(node.val)
+          if (node.left) data.push(node.left)
+          if (node.right) data.push(node.right)
+        }
+        res.push(arr)
+      }
+
+      return res
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-02-19 11:24:09
+ * @LastEditTime: 2021-02-19 15:05:34
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix 。
+
+    // 示例 1：
+    // 输入：n = 3
+    // 输出：[[1,2,3],[8,9,4],[7,6,5]]
+    // 示例 2：
+
+    // 输入：n = 1
+    // 输出：[[1]]
+
+    // 提示：
+
+    // 1 <= n <= 20
+    /**
+     * @param {number} n
+     * @return {number[][]}
+     */
+    var generateMatrix = function (n) {
+      let arr = []
+      for (let i = 0; i < n; i++) {
+        arr.push([])
+      }
+
+      let top = 0, bottom = n - 1, left = 0, right = n - 1
+      let index = 1
+      while (top < bottom && left < right) {
+        for (let i = left; i < right; i++) arr[top][i] = index++   // 上层
+        for (let i = top; i < bottom; i++) arr[i][right] = index++ // 右层
+        for (let i = right; i > left; i--) arr[bottom][i] = index++// 下层
+        for (let i = bottom; i > top; i--) arr[i][left] = index++  // 左层
+        right--
+        top++
+        bottom--
+        left++  // 四个边界同时收缩，进入内层
+      }
+      if (top === bottom) // 剩下一行，从左到右依次添加
+        for (let i = left; i <= right; i++) arr[top][i] = index++
+      else if (left === right) // 剩下一列，从上到下依次添加
+        for (let i = top; i <= bottom; i++) arr[i][left] = index++
+      return arr
+    };
+
+    console.log(generateMatrix(3))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-01-26 15:51:49
+ * @LastEditTime: 2021-01-26 16:07:46
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //     找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+
+    // 说明：
+
+    // 所有数字都是正整数。
+    // 解集不能包含重复的组合。 
+    // 示例 1:
+
+    // 输入: k = 3, n = 7
+    // 输出: [[1,2,4]]
+    // 示例 2:
+
+    // 输入: k = 3, n = 9
+    // 输出: [[1,2,6], [1,3,5], [2,3,4]]
+    /**
+     * @param {number} k
+     * @param {number} n
+     * @return {number[][]}
+     */
+    var combinationSum3 = function (k, n) {
+      let res = []
+      const dfn = function (start, sum, arr) { // item 当前下标  sum 当前总和  arr 当前元素集
+        if (arr.length == k && sum == n) {
+          res.push([...arr])
+        } else if (sum > n || arr.length > k) {
+          return
+        } else {
+          for (let i = start; i < 10; i++) {
+            arr.push(i)
+            dfn(i + 1, sum + i, arr)
+            arr.pop()
+          }
+        }
+      }
+
+      dfn(1, 0, [])
+      return res
+    };
+    console.log(combinationSum3(k = 3, n = 9))
+  </script>
+</body>
+
+</html>

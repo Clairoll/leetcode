@@ -1,0 +1,83 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-02-24 16:50:00
+ * @LastEditTime: 2021-02-25 15:36:12
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //     n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+
+    // 给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。
+
+    // 每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+    // 输入：n = 4
+    // 输出：2
+    // 解释：如上图所示，4 皇后问题存在两个不同的解法。
+    // 示例 2：
+
+    // 输入：n = 1
+    // 输出：1
+    //  
+
+    // 提示：
+
+    // 1 <= n <= 9
+    // 皇后彼此不能相互攻击，也就是说：任何两个皇后都不能处于同一条横行、纵行或斜线上。
+    /**
+     * @param {number} n
+     * @return {string[][]}
+     */
+    var solveNQueens = function (n) {
+      let back = []
+      let res = 0
+      for (let i = 0; i < n; i++) {
+        back.push(new Array(n).fill('.'))
+      }
+
+      let col = new Set() // 记录出现过皇后的列
+      let diag = new Set() // 正对角线
+      let no_diag = new Set() // 反对角线
+
+
+      const dp = function (row) {
+        if (row == n) {
+          res++
+          return
+        }
+
+        for (let i = 0; i < n; i++) {
+          if (!col.has(i) && !diag.has(row + i) && !no_diag.has(row - i)) {
+            back[row][i] = 'Q'
+            col.add(i)
+            diag.add(row + i)
+            no_diag.add(row - i)
+            dp(row + 1)
+
+            back[row][i] = '.'
+            col.delete(i)
+            diag.delete(row + i)
+            no_diag.delete(row - i)
+          }
+        }
+      }
+      dp(0)
+      return res
+    };
+
+    console.log(solveNQueens(4))
+  </script>
+</body>
+
+</html>

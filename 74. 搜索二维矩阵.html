@@ -1,0 +1,54 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-03-30 10:05:55
+ * @LastEditTime: 2021-03-30 10:52:07
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：
+
+    // 每行中的整数从左到右按升序排列。
+    // 每行的第一个整数大于前一行的最后一个整数。
+
+    // 示例 1：
+
+    // 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+    // 输出：true
+    // 示例 2：
+
+    // 输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+    // 输出：false
+    /**
+     * @param {number[][]} matrix
+     * @param {number} target
+     * @return {boolean}
+     */
+    var searchMatrix = function (matrix, target) {
+      let row = matrix.length
+      if (!row) return false
+      let i = 0, j =  matrix[0].length - 1
+      while (i < row && j >= 0) {
+        if(matrix[i][j] == target) return true
+        if(matrix[i][j] > target)  j--
+        else i++
+      }
+      return false
+    };
+
+    console.log(searchMatrix([[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3))
+  </script>
+</body>
+
+</html>

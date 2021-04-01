@@ -1,0 +1,75 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-02-20 11:34:40
+ * @LastEditTime: 2021-02-20 15:06:34
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数。
+
+
+    // 进阶：你可以实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案吗？
+
+    // 示例 1：
+
+    // 输入：nums = [1,2,0]
+    // 输出：3
+    // 示例 2：
+
+    // 输入：nums = [3,4,-1,1]
+    // 输出：2
+    // 示例 3：
+
+    // 输入：nums = [7,8,9,11,12]
+    // 输出：1
+
+    // 提示：
+
+    // 0 <= nums.length <= 300
+    // -231 <= nums[i] <= 231 - 1
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    // 遍历一次数组把大于等于1的和小于数组大小的值放到原数组对应位置，
+    // 然后再遍历一次数组查当前下标是否和值对应，如果不对应那这个下标就是答案，
+    // 否则遍历完都没出现那么答案就是数组长度加1。
+    var firstMissingPositive = function (nums) {
+      let len = nums.length
+      for (let i = 0; i < len; i++) {
+        while (nums[i] > 0 && nums[i] <= len && nums[i] != nums[nums[i]]) {
+          let temp = nums[nums[i]]
+          nums[nums[i]] = nums[i]
+          nums[i] = temp
+        }
+      }
+
+      for (let i = 1; i <= len; i++) {
+        if (nums[i] != i) {
+          return i
+        }
+      }
+      return len + 1
+
+
+    };
+
+    console.log(firstMissingPositive([2]))
+    console.log(firstMissingPositive([3, 4, -1, 1]))
+    console.log(firstMissingPositive([7, 8, 9, 11, 12]))
+  </script>
+</body>
+
+</html>

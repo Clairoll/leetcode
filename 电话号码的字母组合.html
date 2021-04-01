@@ -1,0 +1,70 @@
+<!--
+ * @Autor: Clairoll
+ * @Date: 2021-01-14 10:35:13
+ * @LastEditTime: 2021-01-19 16:53:04
+ * @Email: 1755033445@qq.com
+ * @description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+
+        // 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+        // 示例:
+
+        // 输入："23"
+        // 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+        // 说明:
+        // 尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。
+
+        /**
+         * @param {string} digits
+         * @return {string[]}
+         */
+        var letterCombinations = function (digits) {
+            let len = digits.length
+            if (len <= 0) return []
+            const data = {
+                '2': ['a', 'b', 'c'],
+                '3': ['d', 'e', 'f'],
+                '4': ['g', 'h', 'i'],
+                '5': ['j', 'k', 'l'],
+                '6': ['m', 'n', 'o'],
+                '7': ['p', 'q', 'r', 's'],
+                '8': ['t', 'u', 'v'],
+                '9': ['w', 'x', 'y', 'z']
+            }
+
+            let result = ['']
+            for (let i = 0; i < len; i++) {
+                let tep = result.length
+                for (let j = 0; j < tep; j++) {
+                    let curStr = result.shift() // 取出当前字符串
+                    let item = data[digits[i]] // 当前数字所对应的字符串集
+                    for(let k=0; k< item.length; k++) {
+                        result.push(curStr+ item[k])
+                    } 
+                }
+
+            }
+
+            return result
+        };
+
+        console.log(letterCombinations('2'))
+
+// ))
+
+    </script>
+</body>
+
+</html>
